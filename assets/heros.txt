@@ -6,3 +6,7 @@ elf 128 0 16 32 4
 knight 128 64 16 32 4
 wizard 128 160 16 32 4
 dragon 128 224 16 32 4
+
+shy_guy 368 256 16 32 4
+among_us 368 160 16 32 4
+creeper 432 112 16 16 4
