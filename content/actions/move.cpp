@@ -20,6 +20,10 @@ Result Move::perform(Engine& engine) {
     //     }
     // }
 
+    // for (auto& [pos, door] : engine.dungeon.doors) {
+    //     door.open();
+    // }
+
     Tile& tile = engine.dungeon.tiles(position);
     if (tile.is_wall()) {
         return failure();
