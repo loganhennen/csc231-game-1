@@ -4,11 +4,13 @@
 
 #include "actor.h"
 #include "engine.h"
+#include "opendoor.h"
 
 Move::Move(Vec direction) : direction{direction} {}
 
 Result Move::perform(Engine& engine) {
     Vec position = actor->get_position() + direction;
+    actor->change_direction(direction);
 
     // bool is_even = (position.x + position.y) % 2 == 0;
     // for (auto& [p, door] : engine.dungeon.doors) {
@@ -29,13 +31,13 @@ Result Move::perform(Engine& engine) {
         return failure();
     }
     if (tile.is_door()) {
-        return failure();
+        actor->move_to(position);
+        return alternative(OpenDoor(position));
     }
     if (tile.actor) {
         return failure();
     }
 
     actor->move_to(position);
-    actor->change_direction(direction);
     return success();
 }
