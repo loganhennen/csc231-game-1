@@ -8,7 +8,7 @@ int main() {
     Engine engine{settings};
 
     engine.create_monster(Monsters::goblin());
-    engine.create_monster(Monsters::demon());
+    engine.create_monster(Monsters::demon_big());
     for (int i = 0; i < 5; ++i) {
         engine.create_monster(Monsters::skeleton());
     };

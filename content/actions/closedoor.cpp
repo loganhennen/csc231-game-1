@@ -11,7 +11,7 @@ Result CloseDoor::perform(Engine& engine) {
     std::vector<Vec> neighbors = engine.dungeon.neighbors(position);
     for (Vec neighbor : neighbors) {
         Tile& tile = engine.dungeon.tiles(neighbor);
-        if (tile.is_door()) {
+        if (tile.is_door() && !tile.actor) {
             Door& door = engine.dungeon.doors.at(neighbor);
             door.close();
             closed_any_doors = true;
