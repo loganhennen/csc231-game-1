@@ -19,4 +19,14 @@ MonsterType goblin() {
             default_behavior};
 }
 
+MonsterType demon() {
+    int health = 5;
+    return {"demon", 16, health, std::make_shared<None>(), default_behavior};
+}
+
+MonsterType skeleton() {
+    int health = 1;
+    return {"skeleton", 4, health, std::make_shared<None>(), default_behavior};
+}
+
 }  // namespace Monsters

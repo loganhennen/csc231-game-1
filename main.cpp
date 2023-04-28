@@ -7,9 +7,12 @@ int main() {
     Settings settings = read_settings(filename);
     Engine engine{settings};
 
-    for (int i = 0; i < 15; ++i) {
-        engine.create_monster(Monsters::goblin());
-    }
+    engine.create_monster(Monsters::goblin());
+    engine.create_monster(Monsters::demon());
+    for (int i = 0; i < 5; ++i) {
+        engine.create_monster(Monsters::skeleton());
+    };
+
     engine.create_hero(Heros::nobody);
     engine.run();
 }
