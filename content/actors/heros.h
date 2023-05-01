@@ -1,10 +1,12 @@
 #pragma once
 
+#include "cleaver.h"
 #include "closedoor.h"
 #include "herotype.h"
 #include "move.h"
 #include "none.h"
 #include "rest.h"
+#include "weapon.h"
 
 namespace Heros {
 // Reaction = std::function<std::unique_ptr<Action>()>
@@ -30,6 +32,7 @@ const std::unordered_map<std::string, Reaction> keybindings = {
     {"C", []() { return std::make_unique<CloseDoor>(); }}};
 
 constexpr int default_speed{8};
-const HeroType nobody{"dragon", default_speed, 1, std::make_shared<None>(),
+const HeroType nobody{"dragon", default_speed, 1, std::make_shared<Cleaver>(1),
                       keybindings};
+
 }  // namespace Heros

@@ -3,8 +3,10 @@
 #include <iostream>
 
 #include "actor.h"
+#include "attack.h"
 #include "engine.h"
 #include "opendoor.h"
+#include "rest.h"
 
 Move::Move(Vec direction) : direction{direction} {}
 
@@ -34,9 +36,11 @@ Result Move::perform(Engine& engine) {
         actor->move_to(position);
         return alternative(OpenDoor(position));
     }
-    // if (tile.actor) {
-    //     return failure();
-    // }
+
+    // attack if (tile.actor)
+    if (tile.actor) {
+        return alternative(Attack{*tile.actor});
+    }
 
     actor->move_to(position);
     return success();
