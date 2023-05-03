@@ -2,6 +2,8 @@
 
 #include "action.h"
 #include "engine.h"
+#include "hammer_big.h"
+#include "knife.h"
 #include "monster.h"
 #include "monstertype.h"
 #include "move.h"
@@ -33,18 +35,20 @@ constexpr int default_speed{8};
 
 MonsterType goblin() {
     int health = 2;
-    return {"goblin", default_speed, health, std::make_shared<None>(),
+    return {"goblin", default_speed, health, std::make_shared<Hammer_big>(2),
             default_behavior};
 }
 
 MonsterType demon_big() {
     int health = 5;
-    return {"demon_big", 8, health, std::make_shared<None>(), default_behavior};
+    return {"demon_big", 4, health, std::make_shared<Knife>(1),
+            default_behavior};
 }
 
 MonsterType skeleton() {
     int health = 1;
-    return {"skeleton", 8, health, std::make_shared<None>(), default_behavior};
+    return {"skeleton", 16, health, std::make_shared<Hammer_big>(2),
+            default_behavior};
 }
 
 }  // namespace Monsters
