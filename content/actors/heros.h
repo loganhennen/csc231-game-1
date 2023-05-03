@@ -1,5 +1,6 @@
 #pragma once
 
+#include "attack.h"
 #include "cleaver.h"
 #include "closedoor.h"
 #include "herotype.h"
@@ -29,7 +30,9 @@ const std::unordered_map<std::string, Reaction> keybindings = {
          return std::make_unique<Move>(Vec{0, -1});
      }},
     {"R", []() { return std::make_unique<Rest>(); }},
-    {"C", []() { return std::make_unique<CloseDoor>(); }}};
+    {"C", []() { return std::make_unique<CloseDoor>(); }}  // ,
+    // {"Space", []() { return std::make_unique<Attack>(); }}
+};
 
 constexpr int default_speed{8};
 const HeroType nobody{"dragon", default_speed, 1, std::make_shared<Cleaver>(1),
