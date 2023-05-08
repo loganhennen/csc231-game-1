@@ -1,11 +1,11 @@
 #include "wander.h"
 
-#include "Vec.h"
 #include "actor.h"
 #include "engine.h"
 #include "move.h"
 #include "randomness.h"
 #include "rest.h"
+#include "vec.h"
 
 Result Wander::perform(Engine& engine) {
     // get the current position and neighbors

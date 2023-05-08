@@ -55,3 +55,13 @@ return alernative(Rest{})
 # Position
 Vec is class and 2D vector
 can add and subtract vectors
+
+
+
+phi = - theta + 90 degrees
+
+
+a tan 2(y,x) 
+
+compass coordinates is 0 = north and counts clockwise 
+

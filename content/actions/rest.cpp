@@ -1,5 +1,8 @@
 #include "rest.h"
 
-Result Rest::perform(Engine&) {
+#include "actor.h"
+#include "engine.h"
+
+Result Rest::perform(Engine& engine) {
     return success();
 }

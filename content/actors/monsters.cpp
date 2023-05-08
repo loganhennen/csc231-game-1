@@ -35,19 +35,19 @@ constexpr int default_speed{8};
 
 MonsterType goblin() {
     int health = 2;
-    return {"goblin", default_speed, health, std::make_shared<Hammer_big>(2),
+    return {"goblin", default_speed, health, std::make_shared<Hammer_big>(1),
             default_behavior};
 }
 
 MonsterType demon_big() {
     int health = 5;
-    return {"demon_big", 4, health, std::make_shared<Knife>(1),
+    return {"demon_big", 8, health, std::make_shared<Hammer_big>(3),
             default_behavior};
 }
 
 MonsterType skeleton() {
     int health = 1;
-    return {"skeleton", 16, health, std::make_shared<Hammer_big>(2),
+    return {"skeleton", 8, health, std::make_shared<Knife>(2),
             default_behavior};
 }
 

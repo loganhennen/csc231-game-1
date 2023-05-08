@@ -4,9 +4,11 @@
 #include "cleaver.h"
 #include "closedoor.h"
 #include "herotype.h"
+#include "knife.h"
 #include "move.h"
 #include "none.h"
 #include "rest.h"
+#include "rest_hero.h"
 #include "weapon.h"
 
 namespace Heros {
@@ -29,13 +31,13 @@ const std::unordered_map<std::string, Reaction> keybindings = {
      []() {
          return std::make_unique<Move>(Vec{0, -1});
      }},
-    {"R", []() { return std::make_unique<Rest>(); }},
+    {"R", []() { return std::make_unique<Rest_Hero>(); }},
     {"C", []() { return std::make_unique<CloseDoor>(); }}  // ,
     // {"Space", []() { return std::make_unique<Attack>(); }}
 };
 
 constexpr int default_speed{8};
-const HeroType nobody{"dragon", default_speed, 5, std::make_shared<Cleaver>(3),
+const HeroType nobody{"dragon", default_speed, 21, std::make_shared<Cleaver>(3),
                       keybindings};
 
 }  // namespace Heros

@@ -9,7 +9,7 @@ int main() {
 
     engine.create_monster(Monsters::goblin());
     engine.create_monster(Monsters::demon_big());
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 20; ++i) {
         engine.create_monster(Monsters::skeleton());
     };
 
