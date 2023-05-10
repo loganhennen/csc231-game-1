@@ -1,16 +1,24 @@
 #include "animatedsprite.h"
 
-
 AnimatedSprite::AnimatedSprite() {}
 
-AnimatedSprite::AnimatedSprite(const std::vector<Sprite>& sprites, int ticks_per_frame,
-                               int starting_frame)
-    :visible{true}, sprites{sprites}, ticks_per_frame{ticks_per_frame},
-     current_frame{starting_frame}, time{0} {}
+AnimatedSprite::AnimatedSprite(const std::vector<Sprite>& sprites,
+                               int ticks_per_frame, int starting_frame)
+    : visible{true},
+      sprites{sprites},
+      ticks_per_frame{ticks_per_frame},
+      current_frame{starting_frame},
+      time{0} {}
 
 void AnimatedSprite::flip(bool flip) {
     for (auto& sprite : sprites) {
         sprite.flip = flip;
+    }
+}
+
+void AnimatedSprite::shift(Vec displacement) {
+    for (auto& sprite : sprites) {
+        sprite.shift += displacement;
     }
 }
 
