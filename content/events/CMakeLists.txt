@@ -4,7 +4,7 @@ add_library(events
   die.cpp
   thrust.cpp
   swing.cpp
-  # spin.cpp
+  spin.cpp
   lightning.cpp
   )
 

@@ -8,40 +8,28 @@
 constexpr int duration = 10;
 
 Spin::Spin(Sprite& sprite, Vec direction, Actor& defender, int damage)
-    : Event{3},
+    : Event{duration},
       sprite{sprite},
       copy{sprite},
+      direction{direction},
       defender{defender},
-      damage{damage},
-      starting_angle{sprite.angle} {
-    sprite.center = 360 / ;
+      damage{damage} {
+    sprite.center = sprite.size / 2;
 
-    if (direction == Vec{1, 0}) {
-        starting_angle = 0;
-        delta_angle = 180 / ((duration / 2) - 1);
-        delta_angle = 360 / ((duration / 2) - 1);
-
-    } else if (direction == Vec{-1, 0}) {
-        starting_angle = 0;
-        delta_angle = -180 / ((duration / 2) - 1);
-        delta_angle = -360 / ((duration / 2) - 1);
-    } else if (direction == Vec{0, 1}) {
-        double sign = std::copysign(1.0, starting_angle);
-        starting_angle = -75 * sign;
-        delta_angle = 90.0 / ((duration / 2) - 1) * sign;
-        delta_angle = -75 / ((duration / 2) - 1) * sign;
-        sprite.shift.y -= 12;
-    } else {
-        sprite.shift.x = 0;
-        double sign = std::copysign(1.0, starting_angle);
-        starting_angle = 135 * sign;
-        delta_angle = 270 / ((duration / 2) - 1) * sign;
-        delta_angle = 135 / ((duration / 2) - 1) * sign;
+    if (direction == Vec{0, 1}) {
+        direction = direction * -1;
+    } else if (direction == Vec{0, -1}) {
+        sprite.shift.y += 8;
     }
 }
 
 void Spin::execute(Engine&) {
-    sprite.angle = starting_angle + delta_angle * frame_count;
+    if (direction == Vec{0, 1} || direction == Vec{0, -1}) {
+        sprite.shift += direction * -2;
+    } else {
+        sprite.shift += direction * 2;
+    }
+    sprite.angle += 360 / (duration - 1);
 }
 
 void Spin::when_done(Engine& engine) {

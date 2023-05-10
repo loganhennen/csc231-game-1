@@ -15,7 +15,7 @@ public:
 private:
     Sprite& sprite;
     Sprite copy;
+    Vec direction;
     Actor& defender;
     int damage;
-    double starting_angle, delta_angle;
-}
+};
