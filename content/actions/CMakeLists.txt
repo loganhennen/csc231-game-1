@@ -6,8 +6,8 @@ add_library(actions
   wander.cpp
   attack.cpp
   rest_hero.cpp
-  # power_up.cpp
-  # pickup.cpp
+  power_up.cpp
+  pickup.cpp
   )
 
 target_include_directories(actions PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

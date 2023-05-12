@@ -7,6 +7,7 @@
 #include "knife.h"
 #include "move.h"
 #include "none.h"
+#include "pickup.h"
 #include "power_up.h"
 #include "rest.h"
 #include "rest_hero.h"
@@ -34,7 +35,8 @@ const std::unordered_map<std::string, Reaction> keybindings = {
      }},
     {"R", []() { return std::make_unique<Rest_Hero>(); }},
     {"C", []() { return std::make_unique<CloseDoor>(); }}
-    // ,{"Space", []() { return std::make_unique<PowerUp>(); }}
+    // ,{"Space", []() { return std::make_unique<PowerUp>(); }},
+    // {"E",[](){return std::make_unique<PickUp>();}}
 };
 
 constexpr int default_speed{8};

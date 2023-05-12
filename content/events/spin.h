@@ -8,14 +8,16 @@ class Actor;
 
 class Spin : public Event {
 public:
-    Spin(Sprite& sprite, Vec direction, Actor& defender, int damage);
+    Spin(Sprite& sprite, Vec direction, Actor& defender, int damage,
+         Vec start_position, Vec end_position);
     void execute(Engine& engine) override;
     void when_done(Engine& engine) override;
 
 private:
     Sprite& sprite;
-    Sprite copy;
     Vec direction;
     Actor& defender;
     int damage;
+    Vec start_position;
+    Vec end_position;
 };

@@ -7,13 +7,15 @@
 
 constexpr int duration = 10;
 
-Spin::Spin(Sprite& sprite, Vec direction, Actor& defender, int damage)
+Spin::Spin(Sprite& sprite, Vec direction, Actor& defender, int damage,
+           Vec start_position, Vec end_position)
     : Event{duration},
       sprite{sprite},
-      copy{sprite},
       direction{direction},
       defender{defender},
-      damage{damage} {
+      damage{damage},
+      start_position{start_position},
+      end_position{end_position} {
     sprite.center = sprite.size / 2;
 
     if (direction == Vec{0, 1}) {
@@ -26,13 +28,15 @@ Spin::Spin(Sprite& sprite, Vec direction, Actor& defender, int damage)
 void Spin::execute(Engine&) {
     if (direction == Vec{0, 1} || direction == Vec{0, -1}) {
         sprite.shift += direction * -2;
+        double num_tiles = ((end_position.y - start_position.y) / 16);
+        sprite.angle = (sprite.angle + 360 / (duration - 1)) * num_tiles;
     } else {
         sprite.shift += direction * 2;
+        double num_tiles = ((end_position.x - start_position.x) / 16);
+        sprite.angle = (sprite.angle + 360 / (duration - 1)) * num_tiles;
     }
-    sprite.angle += 360 / (duration - 1);
 }
 
 void Spin::when_done(Engine& engine) {
-    sprite = copy;
     engine.events.add(Hit{defender, 100});
 }

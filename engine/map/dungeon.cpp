@@ -1,13 +1,17 @@
 #include "dungeon.h"
+
 #include "fov.h"
 #include "randomness.h"
 
-    
 Dungeon::Dungeon(const Grid<Tile>& tiles, const std::vector<Room>& rooms,
                  const std::unordered_map<Vec, Door>& doors,
                  const std::unordered_map<Vec, AnimatedSprite>& doodads,
                  const std::unordered_set<Vec>& torch_positions)
-    :tiles{tiles}, rooms{rooms}, doors{doors}, doodads{doodads}, torch_positions{torch_positions} {
+    : tiles{tiles},
+      rooms{rooms},
+      doors{doors},
+      doodads{doodads},
+      torch_positions{torch_positions} {
     // all tiles are not visible when first created
     for (int y = 0; y < tiles.height; ++y) {
         for (int x = 0; x < tiles.width; ++x) {
@@ -16,14 +20,13 @@ Dungeon::Dungeon(const Grid<Tile>& tiles, const std::vector<Room>& rooms,
     }
 }
 
-
 Vec Dungeon::random_open_room_tile() const {
     // strategy: choose a room, then choose a random tile within it if
     // it's walkable and unoccupied
     while (true) {
         auto room = random_choice(rooms);
-        int x = randint(room.position.x, room.position.x+room.size.x-1);
-        int y = randint(room.position.y, room.position.y+room.size.y-1);
+        int x = randint(room.position.x, room.position.x + room.size.x - 1);
+        int y = randint(room.position.y, room.position.y + room.size.y - 1);
         if (tiles(x, y).walkable && tiles(x, y).actor == nullptr) {
             return {x, y};
         }
@@ -61,12 +64,10 @@ bool Dungeon::is_blocking(const Vec& position) const {
     const Tile& tile = tiles(position);
     if (tile.is_wall()) {
         return true;
-    }
-    else if (tile.is_door()) {
+    } else if (tile.is_door()) {
         const Door& door = doors.at(position);
-        return !door.is_open(); // closed door
-    }
-    else {
+        return !door.is_open();  // closed door
+    } else {
         return false;
     }
 }

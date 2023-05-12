@@ -6,6 +6,7 @@
 #include "attack.h"
 #include "engine.h"
 #include "opendoor.h"
+#include "pickup.h"
 #include "rest.h"
 
 Move::Move(Vec direction) : direction{direction} {}
@@ -33,9 +34,9 @@ Result Move::perform(Engine& engine) {
         return alternative(OpenDoor(position));
     }
 
-    // if (tile.is_weapon() && engine.hero) {
-    //     return alternative(Pickup());
-    // }
+    if (tile.weapon && engine.hero) {
+        return alternative(Pickup());
+    }
 
     actor->move_to(position);
     return success();

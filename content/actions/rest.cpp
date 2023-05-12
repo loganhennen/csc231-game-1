@@ -3,6 +3,6 @@
 #include "actor.h"
 #include "engine.h"
 
-Result Rest::perform(Engine& engine) {
+Result Rest::perform(Engine&) {
     return success();
 }

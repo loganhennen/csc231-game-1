@@ -1,12 +1,14 @@
-// #include "pickup.h"
+#include "pickup.h"
 
-// #include "actor.h"
-// #include "engine.h"
+#include "actor.h"
+#include "engine.h"
+#include "hero.h"
 
-// Pickup::Pickup(Vec position) : position{position} {}
-
-// Result Pickup::perform(Engine& engine) {
-//     Tile& tile = engine.dungeon.tiles();
-//     if (tile.is_weapon()) {
-//     }
-// }
+Result Pickup::perform(Engine& engine) {
+    Tile& tile = engine.dungeon.tiles(actor->get_position());
+    if (tile.weapon) {
+        std::swap(engine.hero->type.weapon, tile.weapon);
+        return success();
+    }
+    return failure();
+}
