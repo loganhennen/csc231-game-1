@@ -17,7 +17,9 @@ void Cleaver::use(Engine& engine, Actor& attacker, Actor& defender) {
     Vec direction = defender.get_position() - attacker.get_position();
     engine.events.add(Thrust{sprite, direction, defender, damage});
 
-    Tile& tile = engine.dungeon.tiles;
+    // if(){};
+    // if power_up then spin
+    // else thrust
     engine.events.add(Spin{tile.weapon, direction, defender, attacker, 100,
                            start_position, end_position});
 }
