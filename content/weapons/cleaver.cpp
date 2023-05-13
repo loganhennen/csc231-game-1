@@ -1,7 +1,9 @@
 #include "cleaver.h"
 
+#include "action.h"
 #include "die.h"
 #include "engine.h"
+#include "hero.h"
 #include "hit.h"
 #include "lightning.h"
 #include "spin.h"
@@ -14,4 +16,8 @@ void Cleaver::use(Engine& engine, Actor& attacker, Actor& defender) {
     // engine.events.add(Lightning{defender.get_position(), damage});
     Vec direction = defender.get_position() - attacker.get_position();
     engine.events.add(Thrust{sprite, direction, defender, damage});
+
+    Tile& tile = engine.dungeon.tiles;
+    engine.events.add(Spin{tile.weapon, direction, defender, attacker, 100,
+                           start_position, end_position});
 }

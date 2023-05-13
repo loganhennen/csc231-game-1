@@ -7,27 +7,30 @@ constexpr int TEAM_HERO = 0;
 constexpr double WEAPON_ANGLE = 20;
 
 Hero::Hero(Engine& engine, HeroType type, const Vec& position)
-    :Actor{engine, position, type.max_health, TEAM_HERO, type.speed}, type{type} {
+    : Actor{engine, position, type.max_health, TEAM_HERO, type.speed},
+      type{type} {
     move_to(position);
     sprite = engine.graphics.get_animated_sprite(type.sprite_name, 1, true);
-    type.weapon->sprite = engine.graphics.get_sprite(type.weapon->name);
-    type.weapon->sprite.shift.x = sprite.get_sprite().size.x/8;
-    type.weapon->sprite.angle = WEAPON_ANGLE;
-    type.weapon->sprite.center = {type.weapon->sprite.size.x / 2, type.weapon->sprite.size.y};
+    this->weapon = type.weapon;
+    type.weapon = nullptr;
+    weapon->sprite = engine.graphics.get_sprite(weapon->name);
+    weapon->sprite.shift.x = sprite.get_sprite().size.x / 8;
+    weapon->sprite.angle = WEAPON_ANGLE;
+    weapon->sprite.center = {weapon->sprite.size.x / 2, weapon->sprite.size.y};
 }
 
 void Hero::change_direction(const Vec& dir) {
     direction = dir;
     if (direction.x == 1) {
         sprite.flip(false);
-        type.weapon->sprite.flip = false;
-        type.weapon->sprite.shift.x = sprite.get_sprite().size.x/8;
-        type.weapon->sprite.angle = WEAPON_ANGLE;
+        weapon->sprite.flip = false;
+        weapon->sprite.shift.x = sprite.get_sprite().size.x / 8;
+        weapon->sprite.angle = WEAPON_ANGLE;
     } else if (direction.x == -1) {
         sprite.flip(true);
-        type.weapon->sprite.flip = true;
-        type.weapon->sprite.shift.x = -sprite.get_sprite().size.x/2;
-        type.weapon->sprite.angle = -WEAPON_ANGLE;
+        weapon->sprite.flip = true;
+        weapon->sprite.shift.x = -sprite.get_sprite().size.x / 2;
+        weapon->sprite.angle = -WEAPON_ANGLE;
     }
 }
 
@@ -38,7 +41,7 @@ void Hero::move_to(const Vec& new_position) {
 }
 
 void Hero::attack(Actor& defender) {
-    type.weapon->use(engine, *this, defender);
+    weapon->use(engine, *this, defender);
 }
 
 void Hero::update() {
@@ -53,7 +56,7 @@ std::unique_ptr<Action> Hero::take_turn() {
 
 std::vector<Sprite> Hero::get_sprites() const {
     auto s = sprite.get_sprite();
-    return {type.weapon->sprite, s};
+    return {weapon->sprite, s};
 }
 
 void Hero::handle_input(const std::string& key_name) {

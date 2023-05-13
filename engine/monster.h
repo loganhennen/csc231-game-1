@@ -1,15 +1,15 @@
 #pragma once
 
-#include "actor.h"
-#include "monstertype.h"
-#include "animatedsprite.h"
 #include <memory>
 #include <vector>
 
+#include "actor.h"
+#include "animatedsprite.h"
+#include "monstertype.h"
 
 class Monster : public Actor {
 public:
-    Monster(Engine& engine, const MonsterType& type, const Vec& position);
+    Monster(Engine& engine, MonsterType type, const Vec& position);
     virtual ~Monster() {}
 
     // orient monster towards direction
