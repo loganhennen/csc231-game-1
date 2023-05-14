@@ -3,6 +3,7 @@
 #include "action.h"
 #include "actor.h"
 #include "animatedsprite.h"
+#include "attack.h"
 #include "die.h"
 #include "engine.h"
 #include "event.h"
@@ -27,14 +28,36 @@ Result PowerUp::perform(Engine& engine) {
             // stop spinning, weapon stays on tile
             break;
         } else if (tile.actor) {
-            engine.events.add(Hit{defender, 100});
+            engine.events.add(Hit{*tile.actor, 100});
         }
+        engine.events.add(Spin{tile.weapon->sprite, direction, 100,
+                               start_position, end_position});
         end_position += direction;
     }
-    Tile& tile = engine.dungeon.tiles(end_position + direction);
-    std::swap(tile.weapon, engine.hero->type.weapon);
-
-    engine.events.add(Spin{tile.weapon->sprite, direction, 100, start_position,
-                           end_position});
+    if (direction == Vec{0, 1}) {
+        Vec tiles2 = {end_position.x, end_position.y - 32};
+        Tile& tile = engine.dungeon.tiles(end_position + direction - tiles2);
+        std::swap(tile.weapon, engine.hero->type.weapon);
+        // engine.events.add(Spin{tile.weapon->sprite, direction, 100,
+        //                        start_position, end_position});
+    } else if (direction == Vec{0, -1}) {
+        Vec tiles2 = {end_position.x, end_position.y + 32};
+        Tile& tile = engine.dungeon.tiles(end_position + direction - tiles2);
+        std::swap(tile.weapon, engine.hero->type.weapon);
+        // engine.events.add(Spin{tile.weapon->sprite, direction, 100,
+        //                        start_position, end_position});
+    } else if (direction == Vec{1, 0}) {
+        Vec tiles2 = {end_position.x - 32, end_position.y};
+        Tile& tile = engine.dungeon.tiles(end_position + direction - tiles2);
+        std::swap(tile.weapon, engine.hero->type.weapon);
+        // engine.events.add(Spin{tile.weapon->sprite, direction, 100,
+        //                        start_position, end_position});
+    } else {
+        Vec tiles2 = {end_position.x + 32, end_position.y};
+        Tile& tile = engine.dungeon.tiles(end_position + direction - tiles2);
+        std::swap(tile.weapon, engine.hero->type.weapon);
+        // engine.events.add(Spin{tile.weapon->sprite, direction, 100,
+        //                        start_position, end_position});
+    }
     return success();
 }
