@@ -3,6 +3,7 @@
 #include "attack.h"
 #include "cleaver.h"
 #include "closedoor.h"
+#include "engine.h"
 #include "herotype.h"
 #include "knife.h"
 #include "move.h"
@@ -11,6 +12,7 @@
 #include "power_up.h"
 #include "rest.h"
 #include "rest_hero.h"
+#include "vec.h"
 #include "weapon.h"
 
 namespace Heros {
@@ -34,10 +36,9 @@ const std::unordered_map<std::string, Reaction> keybindings = {
          return std::make_unique<Move>(Vec{0, -1});
      }},
     {"R", []() { return std::make_unique<Rest_Hero>(); }},
-    {"C", []() { return std::make_unique<CloseDoor>(); }}
-    // ,{"Space", []() { return std::make_unique<PowerUp>(); }},
-    // {"E",[](){return std::make_unique<PickUp>();}}
-};
+    {"C", []() { return std::make_unique<CloseDoor>(); }},
+    {"Space", []() { return std::make_unique<PowerUp>(); }},
+    {"E", []() { return std::make_unique<Pickup>(); }}};
 
 constexpr int default_speed{8};
 const HeroType nobody{"dragon", default_speed, 21, std::make_shared<Cleaver>(3),
