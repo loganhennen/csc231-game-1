@@ -10,7 +10,7 @@ Result Pickup::perform(Engine& engine) {
     if (tile.weapon->name == "none") {
         return failure();
     } else {
-        std::swap(engine.hero->type.weapon, tile.weapon);
+        std::swap(actor->weapon, tile.weapon);
         return success();
     }
 }

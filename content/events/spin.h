@@ -9,16 +9,16 @@ class Actor;
 
 class Spin : public Event {
 public:
-    Spin(HeroType& herotype, Vec direction, int damage, Vec start_position,
+    Spin(Actor& actor, Vec direction, int damage, Vec start_position,
          Vec end_position);
     void execute(Engine& engine) override;
     void when_done(Engine& engine) override;
 
 private:
-    HeroType& herotype;
+    Actor& actor;
     Vec direction;
     int damage;
-    Vec& start_position;
-    Vec& end_position;
+    Vec start_position;
+    Vec end_position;
     int rotation;
 };

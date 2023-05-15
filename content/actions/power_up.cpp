@@ -33,6 +33,6 @@ Result PowerUp::perform(Engine& engine) {
         end_position += direction;
     }
     engine.events.add(
-        Spin{engine.hero->type, direction, 100, start_position, end_position});
+        Spin{*actor, direction, 100, start_position, end_position});
     return success();
 }
