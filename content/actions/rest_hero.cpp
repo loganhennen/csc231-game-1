@@ -5,7 +5,7 @@
 
 Result Rest_Hero::perform(Engine& engine) {
     if (engine.hero->health < engine.hero->max_health) {
-        engine.hero->health += 1;
+        engine.hero->health += 5;
     }
     return success();
 }

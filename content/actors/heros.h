@@ -41,7 +41,7 @@ const std::unordered_map<std::string, Reaction> keybindings = {
     {"E", []() { return std::make_unique<Pickup>(); }}};
 
 constexpr int default_speed{8};
-const HeroType nobody{"dragon", default_speed, 21, std::make_shared<Cleaver>(3),
-                      keybindings};
+const HeroType nobody{"dragon", default_speed, 210,
+                      std::make_shared<Cleaver>(30), keybindings};
 
 }  // namespace Heros

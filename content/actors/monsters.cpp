@@ -34,20 +34,20 @@ std::unique_ptr<Action> default_behavior(Engine& engine, Monster& me) {
 constexpr int default_speed{8};
 
 MonsterType goblin() {
-    int health = 2;
-    return {"goblin", default_speed, health, std::make_shared<Hammer_big>(1),
+    int health = 30;
+    return {"goblin", default_speed, health, std::make_shared<Hammer_big>(10),
             default_behavior};
 }
 
 MonsterType demon_big() {
-    int health = 5;
-    return {"demon_big", 8, health, std::make_shared<Hammer_big>(3),
+    int health = 50;
+    return {"demon_big", 8, health, std::make_shared<Hammer_big>(30),
             default_behavior};
 }
 
 MonsterType skeleton() {
-    int health = 1;
-    return {"skeleton", 8, health, std::make_shared<Knife>(2),
+    int health = 20;
+    return {"skeleton", 8, health, std::make_shared<Knife>(20),
             default_behavior};
 }
 
