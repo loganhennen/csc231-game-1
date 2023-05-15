@@ -19,22 +19,21 @@ Spin::Spin(Sprite& sprite, Vec direction, int damage, Vec start_position,
       end_position{end_position} {
     sprite.center = sprite.size / 2;
 
-    if (direction == Vec{0, 1}) {
-        direction = direction * -1;
-    } else if (direction == Vec{0, -1}) {
-        sprite.shift.y += 8;
-    }
+    // if (direction == Vec{0, 1}) {
+    //     direction = direction * -1;
 }
 
 void Spin::execute(Engine&) {
     if (direction == Vec{0, 1} || direction == Vec{0, -1}) {
         sprite.shift += direction * -2;
-        // double num_tiles = ((end_position.y - start_position.y) / 16);
-        sprite.angle += 360 / (duration - 1);  // * num_tiles;
+        double num_tiles = ((end_position.y - start_position.y) / 16);
+        for (int i = 0; i < num_tiles; ++i) {
+            sprite.angle += (360 / (duration - 1));
+        }  //  * num_tiles;
     } else {
         sprite.shift += direction * 2;
-        // double num_tiles = ((end_position.x - start_position.x) / 16);
-        sprite.angle += 360 / (duration - 1);  // * num_tiles;
+        double num_tiles = ((end_position.x - start_position.x) / 16);
+        sprite.angle += (360 / (duration - 1)) * num_tiles;
     }
 }
 
