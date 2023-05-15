@@ -34,10 +34,6 @@ Result Move::perform(Engine& engine) {
         return alternative(OpenDoor(position));
     }
 
-    if (tile.weapon && engine.hero) {
-        return alternative(Pickup());
-    }
-
     actor->move_to(position);
     return success();
 }

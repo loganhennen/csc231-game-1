@@ -13,6 +13,13 @@ int main() {
         engine.create_monster(Monsters::skeleton());
     };
 
+    for (int y{0}; y < engine.dungeon.tiles.height; ++y) {
+        for (int x{0}; x < engine.dungeon.tiles.width; ++x) {
+            Tile& tile = engine.dungeon.tiles(Vec{x, y});
+            tile.weapon = std::make_shared<None>();
+        }
+    };
+
     engine.create_hero(Heros::nobody);
     engine.run();
 }

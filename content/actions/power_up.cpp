@@ -32,10 +32,7 @@ Result PowerUp::perform(Engine& engine) {
         }
         end_position += direction;
     }
-    Tile& tile = engine.dungeon.tiles(end_position);
-    std::swap(tile.weapon, engine.hero->type.weapon);
-    engine.events.add(Spin{tile.weapon->sprite, direction, 100, start_position,
-                           end_position});
-
+    engine.events.add(
+        Spin{engine.hero->type, direction, 100, start_position, end_position});
     return success();
 }

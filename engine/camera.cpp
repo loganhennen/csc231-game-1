@@ -35,9 +35,6 @@ void Camera::render(const Dungeon& dungeon) const {
             if (within_view(position)) {
                 const Tile& tile = dungeon.tiles(position);
                 render(position, tile.sprite);
-                if (tile.weapon) {
-                    render(position, tile.weapon->sprite);
-                }
             }
         }
     }
@@ -46,6 +43,16 @@ void Camera::render(const Dungeon& dungeon) const {
     for (auto& [position, doodad] : dungeon.doodads) {
         if (within_view(position)) {
             render(position, doodad.get_sprite());
+        }
+    }
+    // draw weapons
+    for (int y = ymin; y <= ymax; ++y) {
+        for (int x = xmin; x <= xmax; ++x) {
+            Vec position{x, y};
+            if (within_view(position)) {
+                const Tile& tile = dungeon.tiles(position);
+                render(position, tile.weapon->sprite);
+            }
         }
     }
 

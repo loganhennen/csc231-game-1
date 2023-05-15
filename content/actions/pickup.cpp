@@ -6,11 +6,11 @@
 
 Result Pickup::perform(Engine& engine) {
     Vec position = actor->get_position();
-    Vec direction = actor->get_direction();
-    Tile& tile = engine.dungeon.tiles(position + direction);
-    if (tile.weapon) {
+    Tile& tile = engine.dungeon.tiles(position);
+    if (tile.weapon->name == "none") {
+        return failure();
+    } else {
         std::swap(engine.hero->type.weapon, tile.weapon);
         return success();
     }
-    return failure();
 }
