@@ -15,13 +15,13 @@ Spin::Spin(Actor& actor, Vec direction, int damage, Vec start_position,
       damage{damage},
       start_position{start_position},
       end_position{end_position} {
-    actor.weapon->sprite.center = actor.weapon->sprite.size / 2;
+    actor.weapon->sprite.center.y = -actor.weapon->sprite.size.y / 2;
     rotation = 30 * std::copysign(1, direction.x);
     this->direction.y *= -1;
 }
 
 void Spin::execute(Engine&) {
-    actor.weapon->sprite.shift = direction * frame_count / 10.0 * 16;
+    actor.weapon->sprite.shift = direction * frame_count * 2;
     actor.weapon->sprite.angle += rotation;
 }
 
